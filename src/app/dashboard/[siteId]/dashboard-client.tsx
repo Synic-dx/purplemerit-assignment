@@ -97,7 +97,7 @@ export function DashboardClient({ site, tokens, locks }: Props) {
             className="flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-violet-600 hover:bg-violet-500 text-white rounded-lg transition-colors shadow-lg shadow-violet-900/30"
           >
             <Download className="w-4 h-4" />
-            <span>Export</span>
+            <span>Export Tokens</span>
           </button>
         </div>
       </header>
