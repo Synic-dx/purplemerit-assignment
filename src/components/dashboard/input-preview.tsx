@@ -10,7 +10,7 @@ export function InputPreview() {
           readOnly
           className="w-full px-4 py-3 outline-none"
           style={{
-            backgroundColor: 'var(--color-surface)',
+            backgroundColor: '#fff',
             color: 'var(--color-text)',
             border: '1px solid var(--color-border)',
             borderRadius: 'var(--radius-md)',
@@ -26,7 +26,7 @@ export function InputPreview() {
           readOnly
           className="w-full px-4 py-3 outline-none"
           style={{
-            backgroundColor: 'var(--color-surface)',
+            backgroundColor: '#fff',
             color: 'var(--color-text)',
             border: '2px solid var(--color-primary)',
             borderRadius: 'var(--radius-md)',
@@ -43,7 +43,7 @@ export function InputPreview() {
             readOnly
             className="w-full px-4 py-3 outline-none"
             style={{
-              backgroundColor: 'var(--color-surface)',
+              backgroundColor: '#fff',
               color: 'var(--color-text)',
               border: '2px solid var(--color-error)',
               borderRadius: 'var(--radius-md)',

@@ -7,7 +7,7 @@ export function CardPreview() {
         <div
           className="p-6 rounded-xl"
           style={{
-            backgroundColor: 'var(--color-surface)',
+            backgroundColor: '#f8fafc',
             boxShadow: 'var(--shadow-md)',
             borderRadius: 'var(--radius-lg)',
             fontFamily: 'var(--font-body)',
@@ -35,7 +35,7 @@ export function CardPreview() {
         <div
           className="p-6 rounded-xl"
           style={{
-            backgroundColor: 'var(--color-surface)',
+            backgroundColor: '#f8fafc',
             borderRadius: 'var(--radius-lg)',
             fontFamily: 'var(--font-body)',
           }}
@@ -60,7 +60,7 @@ export function CardPreview() {
         <div
           className="p-6 rounded-xl"
           style={{
-            backgroundColor: 'var(--color-bg)',
+            backgroundColor: '#fff',
             border: '1px solid var(--color-border)',
             borderRadius: 'var(--radius-lg)',
             fontFamily: 'var(--font-body)',
