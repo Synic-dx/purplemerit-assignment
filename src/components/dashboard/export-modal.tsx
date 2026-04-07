@@ -45,13 +45,13 @@ export function ExportModal({ open, onClose }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="bg-zinc-950 border-zinc-800 text-white w-[calc(100vw-2rem)] max-w-2xl">
+      <DialogContent className="bg-zinc-950 border-zinc-800 text-white w-[calc(100vw-2rem)] max-w-2xl max-h-[calc(100vh-2rem)] overflow-hidden">
         <DialogHeader>
           <DialogTitle>Export Tokens</DialogTitle>
         </DialogHeader>
 
-        <Tabs defaultValue="css">
-          <TabsList className="bg-zinc-900 border border-zinc-800">
+        <Tabs defaultValue="css" className="min-h-0">
+          <TabsList className="h-auto w-full flex-wrap justify-start bg-zinc-900 border border-zinc-800">
             {tabs.map((t) => (
               <TabsTrigger
                 key={t.id}
@@ -64,12 +64,9 @@ export function ExportModal({ open, onClose }: Props) {
           </TabsList>
 
           {tabs.map((t) => (
-            <TabsContent key={t.id} value={t.id}>
-              <div className="relative">
-                <pre className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 text-xs font-mono text-zinc-300 overflow-auto max-h-96 leading-relaxed">
-                  {t.content}
-                </pre>
-                <div className="absolute top-2 right-2 flex gap-2">
+            <TabsContent key={t.id} value={t.id} className="min-h-0">
+              <div className="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900">
+                <div className="flex flex-wrap items-center justify-end gap-2 border-b border-zinc-800 p-3">
                   <button
                     onClick={() => copy(t.content, t.id)}
                     className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded text-xs text-zinc-300 transition-colors"
@@ -87,6 +84,9 @@ export function ExportModal({ open, onClose }: Props) {
                     <Download className="w-3 h-3" /> Download
                   </button>
                 </div>
+                <pre className="overflow-auto p-4 text-xs font-mono text-zinc-300 max-h-[min(24rem,calc(100vh-16rem))] leading-relaxed">
+                  {t.content}
+                </pre>
               </div>
             </TabsContent>
           ))}
