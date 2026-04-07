@@ -22,7 +22,9 @@ export function SpacingEditor() {
     }, 500)
   }
 
-  const maxBar = spacing.unit * Math.max(...spacing.scale)
+  const unit = Number(spacing.unit) || 4
+  const scale = spacing.scale.map(Number)
+  const maxBar = unit * Math.max(...scale)
 
   return (
     <div className="space-y-4">
@@ -35,20 +37,20 @@ export function SpacingEditor() {
         <div className="flex items-center justify-between">
           <label className="text-sm text-zinc-400">Base Unit</label>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-zinc-300">{spacing.unit}px</span>
-            <LockToggle path="spacing.unit" value={spacing.unit} />
+            <span className="text-xs font-mono text-zinc-300">{unit}px</span>
+            <LockToggle path="spacing.unit" value={unit} />
           </div>
         </div>
         <Slider
           min={2}
           max={8}
           step={1}
-          value={[spacing.unit]}
+          value={[unit]}
           onValueChange={(vals) => {
             const v = (vals as number[])[0]
             if (isLocked('spacing.unit')) return
             updateToken('spacing.unit', v)
-            persist('spacing.unit', v, spacing.unit)
+            persist('spacing.unit', v, unit)
           }}
           disabled={isLocked('spacing.unit')}
         />
@@ -57,8 +59,8 @@ export function SpacingEditor() {
       {/* Scale visualization */}
       <div className="space-y-1.5">
         <p className="text-xs text-zinc-500">Scale</p>
-        {spacing.scale.map((s, i) => {
-          const px = s * spacing.unit
+        {scale.map((s, i) => {
+          const px = s * unit
           return (
             <div key={i} className="flex items-center gap-2">
               <span className="text-xs font-mono text-zinc-600 w-8">{i}</span>
@@ -79,11 +81,11 @@ export function SpacingEditor() {
         </p>
         <div
           className="bg-zinc-800 m-2 rounded flex items-center justify-center"
-          style={{ padding: `${spacing.scale[4] * spacing.unit}px` }}
+          style={{ padding: `${(scale[4] ?? 4) * unit}px` }}
         >
           <div
             className="bg-violet-500/20 border border-violet-500/40 rounded text-xs text-zinc-400 text-center"
-            style={{ padding: `${spacing.scale[2] * spacing.unit}px ${spacing.scale[3] * spacing.unit}px` }}
+            style={{ padding: `${(scale[2] ?? 2) * unit}px ${(scale[3] ?? 3) * unit}px` }}
           >
             Content
           </div>

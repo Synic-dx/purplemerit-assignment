@@ -11,15 +11,15 @@ export function TokenSidebar() {
     <div className="h-full flex flex-col bg-[#0a0a0b] border-r border-zinc-800/60">
       <Tabs defaultValue="colors" className="flex flex-col h-full">
         <TabsList className="flex-shrink-0 bg-zinc-900/80 border-b border-zinc-800 rounded-none h-13 px-3 gap-1">
-          <TabsTrigger value="colors" className="flex items-center gap-2 text-sm data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 rounded-md px-4 py-2">
+          <TabsTrigger value="colors" className="flex items-center gap-2 text-sm data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-200 rounded-md px-4 py-2">
             <Palette className="w-4 h-4" />
             Colors
           </TabsTrigger>
-          <TabsTrigger value="typography" className="flex items-center gap-2 text-sm data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 rounded-md px-4 py-2">
+          <TabsTrigger value="typography" className="flex items-center gap-2 text-sm data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-200 rounded-md px-4 py-2">
             <Type className="w-4 h-4" />
             Typography
           </TabsTrigger>
-          <TabsTrigger value="spacing" className="flex items-center gap-2 text-sm data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 rounded-md px-4 py-2">
+          <TabsTrigger value="spacing" className="flex items-center gap-2 text-sm data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-200 rounded-md px-4 py-2">
             <LayoutGrid className="w-4 h-4" />
             Spacing
           </TabsTrigger>
