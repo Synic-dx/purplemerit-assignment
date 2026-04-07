@@ -49,23 +49,21 @@ export function ColorEditor() {
   )
 
   return (
-    <div className="space-y-2">
-      <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-1 mb-3">
+    <div className="space-y-1.5">
+      <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider px-1 mb-4">
         Colors
       </h3>
       {Object.entries(colors).map(([key, value]) => {
         const path = `colors.${key}`
         const locked = isLocked(path)
         const isTextColor = key === 'text' || key === 'textSecondary'
-        const contrast = isTextColor
-          ? getContrastRatio(value, colors.background)
-          : null
+        const contrast = isTextColor ? getContrastRatio(value, colors.background) : null
         const wcag = contrast ? getWcagLevel(contrast) : null
 
         return (
           <div
             key={key}
-            className={`flex items-center gap-3 p-2 rounded-lg transition-all ${
+            className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
               locked ? 'bg-violet-500/5 ring-1 ring-violet-500/20' : 'hover:bg-zinc-800/50'
             }`}
           >
@@ -73,7 +71,7 @@ export function ColorEditor() {
               <PopoverTrigger
                 disabled={locked}
                 title={locked ? 'Token locked' : 'Pick color'}
-                className="w-8 h-8 rounded-md border border-zinc-700 flex-shrink-0 transition-transform hover:scale-105 disabled:cursor-not-allowed"
+                className="w-10 h-10 rounded-lg border border-zinc-700 flex-shrink-0 transition-transform hover:scale-105 disabled:cursor-not-allowed shadow-sm"
                 style={{ backgroundColor: value }}
               />
               <PopoverContent className="w-auto p-3 bg-zinc-900 border-zinc-700" side="right">
@@ -85,15 +83,15 @@ export function ColorEditor() {
                   type="text"
                   value={value}
                   onChange={(e) => handleChange(key, e.target.value, value)}
-                  className="mt-2 w-full bg-zinc-800 border border-zinc-700 rounded px-2 py-1 text-xs text-white font-mono"
+                  className="mt-2 w-full bg-zinc-800 border border-zinc-700 rounded px-2 py-1.5 text-sm text-white font-mono"
                 />
               </PopoverContent>
             </Popover>
 
             <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-zinc-300">{COLOR_LABELS[key] || key}</span>
-                <div className="flex items-center gap-1">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-medium text-zinc-200">{COLOR_LABELS[key] || key}</span>
+                <div className="flex items-center gap-1.5 flex-shrink-0">
                   {wcag && (
                     <span
                       className="text-xs px-1.5 py-0.5 rounded font-mono"
@@ -110,7 +108,7 @@ export function ColorEditor() {
                 value={value}
                 onChange={(e) => handleChange(key, e.target.value, value)}
                 disabled={locked}
-                className="text-xs text-zinc-500 font-mono bg-transparent border-none outline-none w-full disabled:cursor-not-allowed"
+                className="text-xs text-zinc-500 font-mono bg-transparent border-none outline-none w-full disabled:cursor-not-allowed mt-0.5"
               />
             </div>
           </div>

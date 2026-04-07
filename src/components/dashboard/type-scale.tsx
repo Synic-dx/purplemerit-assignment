@@ -1,4 +1,5 @@
-import { computeTypeScale } from '@/lib/token-utils'
+'use client'
+
 import { useTokenStore } from '@/store/token-store'
 
 const TYPE_LEVELS = [
@@ -17,11 +18,11 @@ export function TypeScale() {
 
   return (
     <div>
-      <p className="text-xs font-mono text-zinc-500 mb-4">Type Scale</p>
-      <div className="space-y-3">
+      <p className="text-sm font-mono text-zinc-500 mb-5">Type Scale</p>
+      <div className="space-y-4">
         {TYPE_LEVELS.map(({ var: cssVar, label, specimen }) => (
-          <div key={cssVar} className="flex items-baseline gap-4 group">
-            <span className="text-xs font-mono text-zinc-600 w-12 flex-shrink-0 group-hover:text-zinc-400 transition-colors">
+          <div key={cssVar} className="flex items-baseline gap-5 group">
+            <span className="text-sm font-mono text-zinc-600 w-16 flex-shrink-0 group-hover:text-zinc-400 transition-colors">
               {label}
             </span>
             <p

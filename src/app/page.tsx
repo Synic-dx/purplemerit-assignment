@@ -3,7 +3,7 @@ import { Sparkles, Zap, Lock, Download } from 'lucide-react'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a0a0b] flex flex-col items-center justify-center px-4">
+    <main className="min-h-screen bg-[#0a0a0b] flex flex-col items-center justify-center px-4 py-16">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/20 via-transparent to-transparent pointer-events-none" />
 
@@ -16,7 +16,7 @@ export default function Home() {
 
         {/* Heading */}
         <div className="space-y-4">
-          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-white via-white to-zinc-400 bg-clip-text text-transparent">
               Style
             </span>
@@ -24,27 +24,17 @@ export default function Home() {
               Sync
             </span>
           </h1>
-          <p className="text-xl text-zinc-400 max-w-xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-zinc-400 max-w-xl mx-auto leading-relaxed">
             Paste any URL. Extract its design DNA.{' '}
             <span className="text-zinc-300">Edit, lock, and export</span> production-ready tokens.
           </p>
         </div>
 
-        {/* Input */}
+        {/* Input + examples */}
         <UrlInput />
 
-        {/* Examples */}
-        <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-zinc-600">
-          <span>Try:</span>
-          {['stripe.com', 'linear.app', 'vercel.com', 'github.com'].map((url) => (
-            <span key={url} className="px-2 py-1 bg-zinc-900 border border-zinc-800 rounded font-mono text-zinc-400">
-              {url}
-            </span>
-          ))}
-        </div>
-
         {/* Features */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8 text-left">
           {[
             {
               icon: <Zap className="w-4 h-4 text-violet-400" />,

@@ -5,12 +5,20 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ toke
   const { tokenId } = await params
   const supabase = await createClient()
 
-  const { data, error } = await supabase
+  const sessionId = req.nextUrl.searchParams.get('sessionId')
+
+  let query = supabase
     .from('version_history')
     .select('*')
     .eq('token_id', tokenId)
     .order('created_at', { ascending: false })
     .limit(100)
+
+  if (sessionId) {
+    query = query.eq('session_id', sessionId)
+  }
+
+  const { data, error } = await query
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json(data)

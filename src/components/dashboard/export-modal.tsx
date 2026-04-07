@@ -45,7 +45,7 @@ export function ExportModal({ open, onClose }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="bg-zinc-950 border-zinc-800 text-white max-w-2xl">
+      <DialogContent className="bg-zinc-950 border-zinc-800 text-white w-[calc(100vw-2rem)] max-w-2xl">
         <DialogHeader>
           <DialogTitle>Export Tokens</DialogTitle>
         </DialogHeader>

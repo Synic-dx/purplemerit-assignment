@@ -13,7 +13,7 @@ export function PreviewGrid() {
   return (
     <div style={cssVars as React.CSSProperties} className="h-full overflow-y-auto">
       <div
-        className="min-h-full p-8 space-y-10"
+        className="min-h-full p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-10"
         style={{ backgroundColor: 'var(--color-bg)' }}
       >
         <section

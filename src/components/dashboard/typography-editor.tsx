@@ -33,7 +33,7 @@ export function TypographyEditor() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-1">
+      <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider px-1 mb-2">
         Typography
       </h3>
 
@@ -48,7 +48,7 @@ export function TypographyEditor() {
         return (
           <div key={key} className={`space-y-1 ${locked ? 'opacity-60' : ''}`}>
             <div className="flex items-center justify-between">
-              <label className="text-xs text-zinc-400">{label}</label>
+              <label className="text-sm text-zinc-400">{label}</label>
               <LockToggle path={path} value={(typography as unknown as Record<string, string>)[key]} />
             </div>
             <input
@@ -65,7 +65,7 @@ export function TypographyEditor() {
       {/* Base size */}
       <div className="space-y-1">
         <div className="flex items-center justify-between">
-          <label className="text-xs text-zinc-400">Base Size</label>
+          <label className="text-sm text-zinc-400">Base Size</label>
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono text-zinc-300">{typography.baseSize}</span>
             <LockToggle path="typography.baseSize" value={typography.baseSize} />
@@ -85,7 +85,7 @@ export function TypographyEditor() {
       {/* Scale ratio */}
       <div className="space-y-1">
         <div className="flex items-center justify-between">
-          <label className="text-xs text-zinc-400">Scale Ratio</label>
+          <label className="text-sm text-zinc-400">Scale Ratio</label>
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono text-zinc-300">{typography.scaleRatio.toFixed(3)}</span>
             <LockToggle path="typography.scaleRatio" value={typography.scaleRatio} />

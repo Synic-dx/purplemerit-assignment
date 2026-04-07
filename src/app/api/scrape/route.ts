@@ -1,8 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { extractTokensFromUrl } from '@/lib/css-scraper'
 
 export async function POST(req: NextRequest) {
-  const { url } = await req.json()
+  let body: { url?: string }
+  try {
+    body = await req.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
+  }
+
+  const { url } = body
   if (!url) return NextResponse.json({ error: 'URL required' }, { status: 400 })
 
   let parsedUrl: URL
@@ -12,7 +20,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid URL' }, { status: 400 })
   }
 
-  const supabase = await createClient()
+  let supabase: Awaited<ReturnType<typeof createClient>>
+  try {
+    supabase = await createClient()
+  } catch (err) {
+    console.error('Supabase client error:', err)
+    return NextResponse.json({ error: 'Database connection failed' }, { status: 500 })
+  }
   const { data: site, error } = await supabase
     .from('scraped_sites')
     .insert({
@@ -36,42 +50,21 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({ url: parsedUrl.href, siteId: site.id }),
     }).catch(() => {})
   } else {
-    // Dev: insert mock tokens immediately
-    await supabase.from('design_tokens').insert({
-      site_id: site.id,
-      colors: {
-        primary: '#7c3aed',
-        secondary: '#1e293b',
-        accent: '#f59e0b',
-        background: '#ffffff',
-        surface: '#f8fafc',
-        text: '#0f172a',
-        textSecondary: '#64748b',
-        border: '#e2e8f0',
-        error: '#ef4444',
-        success: '#22c55e',
-      },
-      typography: {
-        headingFont: 'Inter',
-        bodyFont: 'Inter',
-        monoFont: 'JetBrains Mono',
-        baseSize: '16px',
-        scaleRatio: 1.25,
-        weights: { light: 300, regular: 400, medium: 500, semibold: 600, bold: 700 },
-        lineHeights: { tight: '1.25', normal: '1.5', relaxed: '1.75' },
-      },
-      spacing: { unit: 4, scale: [0, 1, 2, 3, 4, 6, 8, 12, 16, 24, 32] },
-      shadows: {
-        sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-        md: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-        lg: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
-      },
-      radii: { sm: '0.25rem', md: '0.375rem', lg: '0.5rem', full: '9999px' },
-    })
-    await supabase
-      .from('scraped_sites')
-      .update({ extraction_status: 'completed' })
-      .eq('id', site.id)
+    // No external scraper — extract tokens directly from the URL
+    try {
+      const tokens = await extractTokensFromUrl(parsedUrl.href)
+      await supabase.from('design_tokens').insert({ site_id: site.id, ...tokens })
+      await supabase
+        .from('scraped_sites')
+        .update({ extraction_status: 'completed' })
+        .eq('id', site.id)
+    } catch (err) {
+      console.error('Extraction error:', err)
+      await supabase
+        .from('scraped_sites')
+        .update({ extraction_status: 'failed', error_message: String(err) })
+        .eq('id', site.id)
+    }
   }
 
   return NextResponse.json({ siteId: site.id })

@@ -32,9 +32,10 @@ export function VersionTimeline({ open, onClose }: Props) {
   useEffect(() => {
     if (!open || !tokenId) return
     setLoading(true)
-    fetch(`/api/history/${tokenId}`)
+    const sessionId = getSessionId()
+    fetch(`/api/history/${tokenId}?sessionId=${sessionId}`)
       .then((r) => r.json())
-      .then(setHistory)
+      .then((data) => setHistory(Array.isArray(data) ? data : []))
       .finally(() => setLoading(false))
   }, [open, tokenId])
 
@@ -49,7 +50,8 @@ export function VersionTimeline({ open, onClose }: Props) {
     if (data.restoredValue && data.path) {
       updateToken(data.path, data.restoredValue)
       // Refresh history
-      fetch(`/api/history/${tokenId}`)
+      const sid = getSessionId()
+      fetch(`/api/history/${tokenId}?sessionId=${sid}`)
         .then((r) => r.json())
         .then(setHistory)
     }

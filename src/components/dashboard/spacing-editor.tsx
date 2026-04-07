@@ -26,14 +26,14 @@ export function SpacingEditor() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-1">
+      <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider px-1 mb-2">
         Spacing
       </h3>
 
       {/* Base unit */}
       <div className="space-y-1">
         <div className="flex items-center justify-between">
-          <label className="text-xs text-zinc-400">Base Unit</label>
+          <label className="text-sm text-zinc-400">Base Unit</label>
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono text-zinc-300">{spacing.unit}px</span>
             <LockToggle path="spacing.unit" value={spacing.unit} />
